@@ -30,7 +30,7 @@ def vcr(vcr):
         ("client_id", "secret"),
         ("client_secret", "secret"),
     ]
-    vcr.match_on = ["method", "scheme", "host", "port", "path"]
+    vcr.match_on = ["method", "scheme", "port", "path"]
     vcr.before_record_response = scrub_access_token()
     return vcr
 
