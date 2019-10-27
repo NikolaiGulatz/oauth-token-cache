@@ -27,3 +27,4 @@ jobs:
         - poetry install -v
       script:
         - poetry run pytest --cov=oauth_token_cache --cov-report term-missing test/
+        - poetry run codecov

@@ -1,6 +1,6 @@
 # oauth-token-cache
 
-[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache)
+[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache) [![codecov](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache)
 
 Easily obtain and cache OAuth 2.0 JWT tokens from Auth0.
 

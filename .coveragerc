@@ -1,0 +1,9 @@
+[run]
+source = oauth_token_cache
+branch = True
+
+[report]
+exclude_lines =
+    pragma: no cover
+    def __repr__
+ignore_errors = True
