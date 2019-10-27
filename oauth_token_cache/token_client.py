@@ -1,14 +1,11 @@
-"""
-TokenClient
-"""
+"""TokenClient"""
 import requests
 
 from .token import Token
 
 
 class TokenClient:
-    """
-    Retrieves OAuth 2.0 tokens from the token endpoint and from the redis cache.
+    """Retrieve OAuth 2.0 tokens from the token endpoint and from the redis cache.
 
     Args:
         client_id (str)
@@ -36,8 +33,7 @@ class TokenClient:
         self.timeout = kwargs.get("timeout", 5)
 
     def fresh_token(self):
-        """
-        Obtain a fresh OAuth 2.0 token.
+        """Obtain a fresh OAuth 2.0 token from the token endpoint.
 
         Returns:
             Token: A Token instance
@@ -65,8 +61,7 @@ class TokenClient:
         return self.cache_token(token)
 
     def cached_token(self):
-        """
-        Try to retrieve a cached token from Redis.
+        """Try to retrieve a cached token from Redis.
 
         Returns:
             None: Returns `None` in case of a cache miss
@@ -80,14 +75,13 @@ class TokenClient:
         return Token.from_cache(values)
 
     def cache_token(self, token):
-        """
-        Serialize a Token instance as a dict and save it to Redis.
+        """Persist a Token instance in redis.
 
         Args:
-            token (Token): The token to save
+            token (Token): The token to persist.
 
         Returns:
-            Token: The saved token
+            Token: The persisted token
         """
         pipeline = self.redis_client.pipeline()
 
@@ -99,11 +93,10 @@ class TokenClient:
 
     @property
     def cache_key(self):
-        """
-        Return the cache key for the configuration.
+        """Return the cache key for the configured client_id and audience.
 
         Returns:
-            str: A cache key in the format "oauth_token_cache__<client_id>_<audience>"
+            str: A cache key in the format `oauth_token_cache__<client_id>_<audience>`
         """
         return "oauth_token_cache__{client_id}_{audience}".format(
             client_id=self.client_id, audience=self.audience

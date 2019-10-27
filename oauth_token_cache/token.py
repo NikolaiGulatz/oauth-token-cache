@@ -1,12 +1,9 @@
-"""
-Token
-"""
+"""Token"""
 import time
 
 
 class Token:
-    """
-    Represents an OAuth 2.0 token which is aware of its expiry.
+    """An OAuth 2.0 token which is aware of its expiry.
 
     Args:
         access_token (str): The OAuth 2.0 access token
@@ -24,7 +21,12 @@ class Token:
     """
 
     def __init__(
-        self, access_token=None, expires_in=None, expires_at=None, token_type=None, audience=None
+        self,
+        access_token=None,
+        expires_in=None,
+        expires_at=None,
+        token_type=None,
+        audience=None,
     ):
         self.access_token = access_token
         self.expires_in = expires_in
@@ -33,33 +35,39 @@ class Token:
         self.audience = audience
 
     @classmethod
-    def from_auth_provider(cls, access_token=None, expires_in=None, token_type=None, audience=None):
-        """
-        Initialize a fresh token from the auth provider.
+    def from_auth_provider(
+        cls, access_token=None, expires_in=None, token_type=None, audience=None
+    ):
+        """Initialize a fresh token from the auth provider.
 
         Args:
             access_token (str)
             expires_in (int)
             token_type (str)
             audience (str)
+
+        Returns:
+            Token: An instance of Token
         """
         expires_at = int(time.time()) + expires_in
 
         return cls(
-          access_token=access_token,
-          expires_in=expires_in,
-          expires_at=expires_at,
-          token_type=token_type,
-          audience=audience,
+            access_token=access_token,
+            expires_in=expires_in,
+            expires_at=expires_at,
+            token_type=token_type,
+            audience=audience,
         )
 
     @classmethod
     def from_cache(cls, cached_token):
-        """
-        Initialize a token from cache.
+        """Initialize a token from cache.
 
         Args:
             cached_token (dict)
+
+        Returns:
+            Token: An instance of Token
         """
         return cls(
             access_token=cached_token["access_token"],
@@ -70,17 +78,11 @@ class Token:
         )
 
     def __eq__(self, obj):
-        return (
-            isinstance(obj, Token)
-            and obj.audience == self.audience
-            and obj.access_token == self.access_token
-            and obj.expires_at == self.expires_at
-        )
+        return isinstance(obj, Token) and obj.asdict() == self.asdict()
 
     @property
     def expired(self):
-        """
-        Whether or not the token has expired
+        """Whether or not the token has expired.
 
         Returns:
             bool: Whether or not the token has expired.
@@ -88,8 +90,7 @@ class Token:
         return int(time.time()) > self.expires_at
 
     def asdict(self):
-        """
-        Serialize token into a dict
+        """Serialize token into a dict.
 
         Returns:
             dict: The serialized token

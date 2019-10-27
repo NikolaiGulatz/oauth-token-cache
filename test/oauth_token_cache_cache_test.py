@@ -1,6 +1,4 @@
-"""
-Test OAuthTokenCache.token() caching behaviour.
-"""
+"""Test OAuthTokenCache.token() caching behaviour."""
 
 import pytest
 from unittest import mock
@@ -17,9 +15,7 @@ def test_existing_local_token(
     audience,
     make_token,
 ):
-    """
-    Valid token in the local cache. Do not check the redis cache and do not issue a fresh token.
-    """
+    """Valid token in the local cache. Do not check the redis cache and do not issue a fresh token."""
     token = make_token()
 
     mock_fresh_token.return_value = token
@@ -40,9 +36,7 @@ def test_expired_local_token(
     audience,
     make_token,
 ):
-    """
-    Expired token in the local cache, no token in the redis cache. Issue a new token after checking both.
-    """
+    """Expired token in the local cache, no token in the redis cache. Issue a new token after checking both."""
     token = make_token()
     expired_token = make_token(expires_at=-1)
 
@@ -65,9 +59,8 @@ def test_redis_cache_hit(
     audience,
     make_token,
 ):
-    """
-    No token in the local cache, token cached in the redis cache. Return token from redis cache
-    without issueing a fresh token.
+    """No token in the local cache, token cached in the redis cache. Return token from redis cache without
+    issueing a fresh token.
     """
     token = make_token()
 
@@ -88,9 +81,8 @@ def test_multiple_redis_cache_hits(
     audience,
     make_token,
 ):
-    """
-    No token in the local cache, token cached in the redis cache. Return token from redis cache
-    without issueing a fresh token, but only check redis cache once.
+    """No token in the local cache, token cached in the redis cache. Return token from redis cache without
+    issueing a fresh token, but only check redis cache once.
     """
     token = make_token()
 
@@ -112,9 +104,7 @@ def test_multiple_redis_cache_misses(
     audience,
     make_token,
 ):
-    """
-    No token in the local cache, no token in the redis cache. Issue a new token after checking both.
-    """
+    """No token in the local cache, no token in the redis cache. Issue a new token after checking both."""
     token = make_token()
 
     mock_fresh_token.return_value = token
@@ -136,9 +126,7 @@ def test_multiple_audiences(
     audience,
     make_token,
 ):
-    """
-    No token in local cache, add tokens for two different audiences and check correct caching.
-    """
+    """No token in local cache, add tokens for two different audiences and check correct caching."""
     first_token = make_token(access_token="first")
     second_token = make_token(access_token="second")
 

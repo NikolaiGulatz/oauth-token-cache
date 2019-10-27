@@ -1,6 +1,4 @@
-"""
-Test OAuthTokenCache.token() behaviour when forcing a refresh.
-"""
+"""Test OAuthTokenCache.token() behaviour when forcing a refresh."""
 import pytest
 from unittest import mock
 

@@ -7,9 +7,7 @@ from oauth_token_cache import OAuthTokenCache, TokenClient
 
 @pytest.mark.vcr()
 def test_all(oauth_token_cache_instance, make_token_client, audience):
-    """
-    Integration test OAuthTokenCache and make sure that the caching mechanism is working.
-    """
+    """ Integration test OAuthTokenCache and make sure that the caching mechanism is working."""
     original_fresh_token = TokenClient.fresh_token
 
     token_client = make_token_client()

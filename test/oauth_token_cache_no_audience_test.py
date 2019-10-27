@@ -1,6 +1,4 @@
-"""
-Test OAuthTokenCache.token() behaviour when not audience is given.
-"""
+"""Test OAuthTokenCache.token() behaviour when not audience is given."""
 import pytest
 
 

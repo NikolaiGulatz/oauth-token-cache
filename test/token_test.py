@@ -9,12 +9,10 @@ from oauth_token_cache import Token
 def expires_in():
     return 3600
 
+
 def test_from_auth_provider(expires_in):
     token = Token.from_auth_provider(
-        access_token="XXX",
-        expires_in=expires_in,
-        token_type="Bearer",
-        audience="test",
+        access_token="XXX", expires_in=expires_in, token_type="Bearer", audience="test"
     )
 
     assert token.expires_at == int(time.time()) + expires_in
@@ -30,6 +28,7 @@ def test_from_auth_provider(expires_in):
 
     assert expired_token.expired == True
 
+
 def test_from_cache(expires_in):
     token = Token.from_cache(
         {
@@ -43,11 +42,13 @@ def test_from_cache(expires_in):
 
     assert token.expired == True
 
+
 def test_active_token(make_token, expires_in):
     token = make_token(expires_in=expires_in)
 
     assert token.expires_at == int(time.time()) + expires_in
     assert token.expired == False
+
 
 def test_expired_token(make_token, expires_in):
     with freeze_time("2019-01-01"):
@@ -64,7 +65,13 @@ def test_expired_token(make_token, expires_in):
 
 def test_asdict(make_token, expires_in):
     dict_token = make_token().asdict()
-    required_keys = ["access_token", "audience", "token_type", "expires_in", "expires_at"]
+    required_keys = [
+        "access_token",
+        "audience",
+        "token_type",
+        "expires_in",
+        "expires_at",
+    ]
 
     assert isinstance(dict_token, dict)
     assert list(dict_token.keys()).sort() == required_keys.sort()

@@ -73,7 +73,7 @@ confidence=
 #                              docstrings to begin with an empty first line!
 # bad-builtin - In some cases built-in functions like "filter" are better than list
 #               comprehensions.
-disable=bad-continuation,too-many-instance-attributes,docstring-first-line-empty,bad-builtin,bad-whitespace
+disable=bad-continuation,too-many-instance-attributes,bad-builtin,bad-whitespace
 
 
 [REPORTS]

@@ -1,8 +1,4 @@
-"""
-Easily obtain and cache OAuth 2.0 tokens from Auth0
-===================================================
-
-Easily obtain and cache OAuth 2.0 JWT tokens from Auth0.
+"""Easily obtain and cache OAuth 2.0 tokens from Auth0
 
 When using external auth providers for obtaining OAuth 2.0 machine-to-machine tokens you may want to share one access
 token across several instances (e.g. processes, threads, containers, pods ...) of your application in order to avoid
@@ -20,8 +16,7 @@ from .token import Token
 
 
 class OAuthTokenCache:
-    """
-    OAuthTokenCache
+    """OAuthTokenCache
 
     Args:
         client_id (str): The client id
@@ -42,11 +37,17 @@ class OAuthTokenCache:
         self.tokens = {}
 
     def token(self, audience=None, refresh=False):
-        """Issue a new OAuth 2.0 token or read it from cache.
+        """Obtain a token for the given audience from cache or request a fresh token if
+        one of the following conditions is true:
+
+            * The token in the cache is expired
+            * There is no token for the given audience in the cache
+            * Refresh is forced
 
         Args:
             audience (str): The audience for which to issue the token
-            refresh (:obj:`bool`, optional): Whether to force refresh the token cache
+            refresh (:obj:`bool`, optional): Whether to force refresh the token cache,
+                defaults to `False`
 
         Raises:
             ValueError: If audience is missing
@@ -79,10 +80,12 @@ class OAuthTokenCache:
         return self.tokens[audience]
 
     def _default_redis_client(self):
-        """
-        Create the default redis client.
+        """Create the default redis client.
 
         Returns:
             redis.Redis: An instance of the redis client
         """
-        return redis.Redis(**{**self.redis_options, **self.REDIS_DEFAULTS})
+        client = redis.Redis(**{**self.redis_options, **self.REDIS_DEFAULTS})
+        client.ping()
+
+        return client
