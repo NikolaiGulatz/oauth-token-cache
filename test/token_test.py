@@ -78,6 +78,7 @@ def test_asdict(make_token, expires_in):
     assert isinstance(dict_token, dict)
     assert list(dict_token.keys()).sort() == required_keys.sort()
 
+
 def test_repr(make_token):
     token = make_token()
 
