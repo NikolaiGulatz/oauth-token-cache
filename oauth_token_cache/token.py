@@ -77,6 +77,12 @@ class Token:
             audience=cached_token["audience"],
         )
 
+    def __repr__(self):
+        return (
+            f"<Token access_token='{self.access_token}' expires_in='{self.expires_in}' expires_at='{self.expires_at}'"
+            f" token_type='{self.token_type}' audience='{self.audience}' expired='{self.expired}'>"
+        )
+
     def __eq__(self, obj):
         return isinstance(obj, Token) and obj.asdict() == self.asdict()
 

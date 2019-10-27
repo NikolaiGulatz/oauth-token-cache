@@ -22,21 +22,24 @@ token_provider = OAuthTokenCache(
     token_url="https://example.com/oauth/token"
 )
 
-token = token_provider.token(audience="test")
+# The token will be cached in Redis. A fresh token will automatically be
+# fetched when calling `token` the next time in case the old token has
+# expired.
+my_token = token_provider.token(audience="test")
 
-# The token is now cached in Redis. A fresh token will automatically be fetched
-# when calling `token` the next time in case the old token has expired.
-
-token.access_token
+my_token.access_token
 >> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFrVkJOemN6TjBNeFJr...
 
-token.audience
+my_token.audience
 >> test
 
-token.expires_at
+my_token.token_type
+>> Bearer
+
+my_token.expires_at
 >> 1572169916
 
-token.expired
+my_token.expired
 >> False
 ```
 
