@@ -44,7 +44,7 @@ def test_expired_local_token(
     Expired token in the local cache, no token in the redis cache. Issue a new token after checking both.
     """
     token = make_token()
-    expired_token = make_token(expires_in=-1)
+    expired_token = make_token(expires_at=-1)
 
     mock_cached_token.return_value = None
     mock_fresh_token.return_value = token

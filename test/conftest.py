@@ -1,5 +1,6 @@
 import os
 import re
+import time
 import pytest
 
 import redis
@@ -89,6 +90,7 @@ def make_token():
     TOKEN_DEFAULTS = {
         "access_token": "access_token",
         "expires_in": 3600,
+        "expires_at": int(time.time()) + 3600,
         "token_type": "Bearer",
         "audience": "test",
     }

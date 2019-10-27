@@ -16,13 +16,28 @@ and in Redis with a TTL which corresponds to the time to expire of your token.
 ```python
 from oauth_token_cache import OAuthTokenCache
 
-token_provider = OAuthTokenCache(client_id="XXX", client_secret="XXX", token_url="https://example.com/oauth/token")
-token = token_provider.token(audience="test").access_token
+token_provider = OAuthTokenCache(
+    client_id="XXX",
+    client_secret="XXX",
+    token_url="https://example.com/oauth/token"
+)
 
-"""
-The token is now cached in Redis. A fresh token will automatically be fetched
-when calling `token` in case the old token has expired.
-"""
+token = token_provider.token(audience="test")
+
+# The token is now cached in Redis. A fresh token will automatically be fetched
+# when calling `token` the next time in case the old token has expired.
+
+token.access_token
+>> eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlFrVkJOemN6TjBNeFJr...
+
+token.audience
+>> test
+
+token.expires_at
+>> 1572169916
+
+token.expired
+>> False
 ```
 
 ## Configuring Redis

@@ -37,7 +37,7 @@ class TokenClient:
 
     def fresh_token(self):
         """
-        Issue a new OAuth 2.0 token.
+        Obtain a fresh OAuth 2.0 token.
 
         Returns:
             Token: A Token instance
@@ -55,7 +55,7 @@ class TokenClient:
         response.raise_for_status()
         response = response.json()
 
-        token = Token(
+        token = Token.from_auth_provider(
             access_token=response["access_token"],
             expires_in=response["expires_in"],
             token_type=response["token_type"],
@@ -77,12 +77,7 @@ class TokenClient:
         if not values:
             return None
 
-        return Token(
-            values["access_token"],
-            int(values["expires_in"]),
-            values["token_type"],
-            values["audience"],
-        )
+        return Token.from_cache(values)
 
     def cache_token(self, token):
         """
