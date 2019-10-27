@@ -1,0 +1,36 @@
+language: python
+
+python:
+  - 3.6
+  - 3.7
+
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+
+services:
+  - redis-server
+
+stages:
+  - lint
+  - test
+
+jobs:
+  include:
+    - stage: lint
+      before_install:
+        - pip install poetry
+      install:
+        - poetry install -v
+      script:
+        - poetry run pylint oauth_token_cache
+        - poetry run black --check .
+    - stage: test
+      before_install:
+        - pip install poetry
+      install:
+        - poetry install -v
+        - pip install tox-travis
+      script:
+        - tox

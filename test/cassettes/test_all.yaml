@@ -1,0 +1,63 @@
+interactions:
+- request:
+    body: '{"grant_type": "client_credentials", "audience": "test", "client_id": "secret",
+      "client_secret": "secret"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '190'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.22.0
+    method: POST
+    uri: https://dev-emcpdzfp.eu.auth0.com/oauth/token
+  response:
+    body:
+      string: '{"access_token":"secret","expires_in":86400,"token_type":"Bearer"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '802'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 27 Oct 2019 00:08:48 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - did=s%3Av0%3Af2d47190-f84d-11e9-b417-bf2cb8d92e90.1LZEmB%2FeZt0INjYYxmI6x8GFQ7inrhXv158lZ1nNbBY;
+        Max-Age=157788000; Path=/; Expires=Sat, 26 Oct 2024 06:08:48 GMT; HttpOnly;
+        Secure
+      Strict-Transport-Security:
+      - max-age=15724800
+      X-Auth0-RequestId:
+      - 00e848e9be4c45677efe
+      X-RateLimit-Limit:
+      - '30'
+      X-RateLimit-Remaining:
+      - '29'
+      X-RateLimit-Reset:
+      - '1572134929'
+      X-Robots-Tag:
+      - noindex, nofollow, nosnippet, noarchive
+      ot-tracer-sampled:
+      - 'true'
+      ot-tracer-spanid:
+      - 14135eae452e7637
+      ot-tracer-traceid:
+      - 2e3f589841f80fab
+    status:
+      code: 200
+      message: OK
+version: 1

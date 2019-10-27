@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "oauth_token_cache"
+version = "0.1.0"
+description = "Easily obtain and cache OAuth 2.0 JWT tokens from Auth0."
+authors = ["Nikolai Gulatz <nikolai.gulatz@posteo.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.6"
+requests = "^2.22"
+redis = "^3.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+tox = "^3.14"
+black = {version = "^18.3-alpha.0",allows-prereleases = true}
+pylint = "^2.4"
+freezegun = "^0.3.12"
+pytest-vcr = "^1.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

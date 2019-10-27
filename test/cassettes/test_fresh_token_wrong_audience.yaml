@@ -1,0 +1,58 @@
+interactions:
+- request:
+    body: '{"grant_type": "client_credentials", "audience": "foo", "client_id": "secret",
+      "client_secret": "secret"}'
+    headers:
+      Accept:
+      - '*/*'
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '189'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.22.0
+    method: POST
+    uri: https://dev-emcpdzfp.eu.auth0.com/oauth/token
+  response:
+    body:
+      string: '{"error":"access_denied","error_description":"Service not enabled within
+        domain: foo"}'
+    headers:
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '86'
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 27 Oct 2019 00:08:48 GMT
+      Server:
+      - nginx
+      Set-Cookie:
+      - did=s%3Av0%3Af326d750-f84d-11e9-8ef0-7be5d4da5e85.pWL9J28O9NQp4a%2BtT7qtQVLuNVM1JwsLM1nJDWpGKTA;
+        Max-Age=157788000; Path=/; Expires=Sat, 26 Oct 2024 06:08:48 GMT; HttpOnly;
+        Secure
+      X-Auth0-RequestId:
+      - 4e301c8c5828f52c41cc
+      X-RateLimit-Limit:
+      - '30'
+      X-RateLimit-Remaining:
+      - '29'
+      X-RateLimit-Reset:
+      - '1572134929'
+      cache-control:
+      - private, no-store, no-cache, must-revalidate, post-check=0, pre-check=0, no-transform
+      ot-tracer-sampled:
+      - 'true'
+      ot-tracer-spanid:
+      - 33bf5fc734d033e7
+      ot-tracer-traceid:
+      - 26db93d31142a1a4
+    status:
+      code: 403
+      message: Forbidden
+version: 1
