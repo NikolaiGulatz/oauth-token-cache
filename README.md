@@ -1,6 +1,6 @@
-# OAuthTokenCache
+# oauth-token-cache
 
-[![Build Status](https://travis-ci.org/NikolaiGulatz/OAuthTokenCache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/OAuthTokenCache)
+[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache)
 
 Easily obtain and cache OAuth 2.0 JWT tokens from Auth0.
 
@@ -8,8 +8,8 @@ When using external auth providers for obtaining OAuth 2.0 machine-to-machine to
 token across several instances (e.g. processes, threads, containers, pods ...) of your application in order to avoid
 having to issue new tokens too often.
 
-OAuthTokenCache makes it easy to obtain, refresh and cache OAuth 2.0 tokens. Obtained tokens are stored both in memory
-and in Redis with a TTL which corresponds to the time to expire of your token.
+oauth-token-cache makes it easy to obtain, refresh and cache OAuth 2.0 tokens. Obtained tokens are stored both in
+memory and in Redis with a TTL which corresponds to the time to expire of your token.
 
 ## Quickstart
 
