@@ -1,13 +1,8 @@
 language: python
 
 python:
-  - 3.6
-  - 3.7
-
-matrix:
-  include:
-    - python: 3.7
-      dist: xenial
+  - "3.6"
+  - "3.7"
 
 services:
   - redis-server
@@ -31,6 +26,5 @@ jobs:
         - pip install poetry
       install:
         - poetry install -v
-        - pip install tox-travis
       script:
-        - tox
+        - poetry run pytest --cov=oauth_token_cache --cov-report term-missing test/
