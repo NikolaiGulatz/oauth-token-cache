@@ -37,10 +37,15 @@ def test_fresh_token_wrong_audience(make_token_client, redis_client):
 
 
 @pytest.mark.vcr()
-def test_cached_token(make_token_client, redis_client):
+def test_cached_token(make_token_client, make_token, redis_client):
     token_client = make_token_client()
+    token = make_token()
 
     assert token_client.cached_token() is None
+
+    token_client.cache_token(token)
+
+    assert token_client.cached_token() == token
 
 
 @pytest.mark.vcr()

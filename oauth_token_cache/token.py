@@ -71,8 +71,8 @@ class Token:
         """
         return cls(
             access_token=cached_token["access_token"],
-            expires_in=cached_token["expires_in"],
-            expires_at=cached_token["expires_at"],
+            expires_in=int(cached_token["expires_in"]),
+            expires_at=int(cached_token["expires_at"]),
             token_type=cached_token["token_type"],
             audience=cached_token["audience"],
         )

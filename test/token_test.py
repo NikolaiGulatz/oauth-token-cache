@@ -30,16 +30,18 @@ def test_from_auth_provider(expires_in):
 
 
 def test_from_cache(expires_in):
-    token = Token.from_cache(
-        {
-            "access_token": "XXX",
-            "expires_in": 1,
-            "expires_at": 1,
-            "token_type": "Bearer",
-            "audience": "test",
-        }
-    )
+    token_dict = {
+        "access_token": "XXX",
+        "expires_in": "1",
+        "expires_at": "1",
+        "token_type": "Bearer",
+        "audience": "test",
+    }
 
+    token = Token.from_cache(token_dict)
+
+    assert token.expires_in == 1
+    assert token.expires_at == 1
     assert token.expired == True
 
 
