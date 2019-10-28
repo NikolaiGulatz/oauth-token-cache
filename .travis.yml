@@ -7,13 +7,15 @@ stages:
   - lint
   - test
 
+before_install:
+  - pip install poetry
+
+install:
+  - poetry install -v
+
 jobs:
   include:
     - stage: lint
-      before_install:
-        - pip install poetry
-      install:
-        - poetry install -v
       script:
         - poetry run pylint oauth_token_cache
         - poetry run black --check .
@@ -21,10 +23,18 @@ jobs:
       python:
         - "3.6"
         - "3.7"
-      before_install:
-        - pip install poetry
-      install:
-        - poetry install -v
       script:
         - poetry run pytest --cov=oauth_token_cache --cov-report term-missing test/
         - poetry run codecov
+    - stage: release
+      script: skip
+      before_deploy:
+        - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
+        - poetry build -f sdist
+      deploy:
+        provider: script
+        script: poetry publish
+        skip_cleanup: true
+        on:
+          tags: true
+      if: tag IS present
