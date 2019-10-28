@@ -1,6 +1,6 @@
 # oauth-token-cache
 
-[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache) [![codecov](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache)
+[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache) [![codecov](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache) [![PyPI version](https://badge.fury.io/py/oauth-token-cache.svg)](https://badge.fury.io/py/oauth-token-cache)
 
 Easily obtain and cache OAuth 2.0 JWT tokens from Auth0.
 
@@ -10,6 +10,10 @@ having to issue new tokens too often.
 
 oauth-token-cache makes it easy to obtain, refresh and cache OAuth 2.0 tokens. Obtained tokens are stored both in
 memory and in Redis with a TTL which corresponds to the time to expire of your token.
+
+```shell
+pip install oauth-token-cache
+```
 
 ## Quickstart
 

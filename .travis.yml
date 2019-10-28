@@ -6,6 +6,7 @@ services:
 stages:
   - lint
   - test
+  - release
 
 before_install:
   - pip install poetry

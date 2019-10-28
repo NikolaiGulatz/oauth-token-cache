@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "oauth_token_cache"
+name = "oauth-token-cache"
 version = "0.1.0"
 description = "Easily obtain and cache OAuth 2.0 JWT tokens from Auth0."
 authors = ["Nikolai Gulatz <nikolai.gulatz@posteo.de>"]
