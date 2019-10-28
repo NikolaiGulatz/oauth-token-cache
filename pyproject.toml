@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Easily obtain and cache OAuth 2.0 JWT tokens from Auth0."
 authors = ["Nikolai Gulatz <nikolai.gulatz@posteo.de>"]
 license = "MIT"
+homepage = "https://github.com/NikolaiGulatz/oauth-token-cache"
 
 [tool.poetry.dependencies]
 python = "^3.6"
