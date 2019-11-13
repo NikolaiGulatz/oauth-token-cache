@@ -50,7 +50,7 @@ my_token.expired
 
 ## Configuring Redis
 
-The `redis_options` argument will be passed on to the redis client. See the[documentation of the redis package](https://pypi.org/project/redis/) on how to configure the client.
+The `redis_options` argument will be passed on to the redis client. See the [documentation of the redis package](https://pypi.org/project/redis/) on how to configure the client.
 
 ```python
 OAuthTokenCache(
