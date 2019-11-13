@@ -13,7 +13,7 @@ stages:
   - release
 
 before_install:
-  - pip install poetry tox-travis
+  - pip install poetry
 
 install:
   - poetry install -v
@@ -21,13 +21,12 @@ install:
 jobs:
   include:
     - stage: lint
-      python: "3.6"
       script:
         - poetry run pylint oauth_token_cache
         - poetry run black --check .
     - stage: test
       script:
-        - make tox
+        - make pytest
       after_success:
         - make codecov
     - stage: release
