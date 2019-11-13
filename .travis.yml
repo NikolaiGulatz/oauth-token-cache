@@ -27,6 +27,8 @@ jobs:
     - stage: test
       script:
         - tox
+      after_success:
+        - poetry run codecov
     - stage: release
       script: skip
       before_deploy:
