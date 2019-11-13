@@ -1,5 +1,14 @@
 language: python
 
+python:
+- "3.5"
+- "3.6"
+
+matrix:
+  include:
+    - python: 3.7
+      dist: xenial
+
 services:
   - redis-server
 
@@ -9,7 +18,7 @@ stages:
   - release
 
 before_install:
-  - pip install poetry
+  - pip install poetry tox-travis
 
 install:
   - poetry install -v
@@ -21,12 +30,8 @@ jobs:
         - poetry run pylint oauth_token_cache
         - poetry run black --check .
     - stage: test
-      python:
-        - "3.6"
-        - "3.7"
       script:
-        - poetry run pytest --cov=oauth_token_cache --cov-report term-missing test/
-        - poetry run codecov
+        - tox
     - stage: release
       script: skip
       before_deploy:
@@ -38,4 +43,5 @@ jobs:
         skip_cleanup: true
         on:
           tags: true
+          condition: "$TRAVIS_PYTHON_VERSION == 3.7"
       if: tag IS present
