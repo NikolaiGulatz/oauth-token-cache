@@ -1,6 +1,6 @@
 # oauth-token-cache
 
-[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache) [![codecov](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache) [![PyPI version](https://badge.fury.io/py/oauth-token-cache.svg)](https://badge.fury.io/py/oauth-token-cache)
+[![Build Status](https://travis-ci.org/NikolaiGulatz/oauth-token-cache.svg?branch=master)](https://travis-ci.org/NikolaiGulatz/oauth-token-cache) [![codecov](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache/branch/master/graph/badge.svg)](https://codecov.io/gh/NikolaiGulatz/oauth-token-cache) [![Maintainability](https://api.codeclimate.com/v1/badges/0c5868af680f364adafa/maintainability)](https://codeclimate.com/github/NikolaiGulatz/oauth-token-cache/maintainability) [![PyPI version](https://badge.fury.io/py/oauth-token-cache.svg)](https://badge.fury.io/py/oauth-token-cache)
 
 Easily obtain and cache OAuth 2.0 JWT tokens from Auth0.
 
@@ -26,9 +26,10 @@ token_provider = OAuthTokenCache(
     token_url="https://example.com/oauth/token"
 )
 
-# The token will be cached in Redis. A fresh token will automatically be
-# fetched when calling `token` the next time in case the old token has
-# expired.
+"""
+The token will be cached in Redis. A fresh token will automatically be
+fetched when calling `token` the next time in case the old token has expired.
+"""
 my_token = token_provider.token(audience="test")
 
 my_token.access_token
@@ -49,7 +50,7 @@ my_token.expired
 
 ## Configuring Redis
 
-The `redis_options` argument will be passed on to the redis client. See the [documentation of the redis package](https://pypi.org/project/redis/) on how to configure the client.
+The `redis_options` argument will be passed on to the redis client. See the[documentation of the redis package](https://pypi.org/project/redis/) on how to configure the client.
 
 ```python
 OAuthTokenCache(
@@ -65,10 +66,11 @@ OAuthTokenCache(
 
 ### Using your own Redis client
 
-You can pass your own Redis client at which `redis_options` will be ignored.
+You can pass your own Redis client at which `redis_options` will be ignored. Make sure to configure the redis client to
+automatically decode responses using `decode_response=True`.
 
 ```python
-redis_client = redis.Redis()
+redis_client = redis.Redis(decode_response=True)
 
 OAuthTokenCache(
     client_id="XXX",
