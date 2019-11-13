@@ -19,6 +19,7 @@ install:
 
 script:
   - make pytest
+  - make codecov
 
 jobs:
   include:
@@ -26,11 +27,6 @@ jobs:
       script:
         - poetry run pylint oauth_token_cache
         - poetry run black --check .
-    - stage: test
-      script:
-        - make pytest
-      after_success:
-        - make codecov
     - stage: release
       python: 3.7
       script: skip
