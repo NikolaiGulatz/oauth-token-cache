@@ -1,8 +1,8 @@
 language: python
 
 python:
-  - "3.6"
-  - "3.7"
+  - 3.6
+  - 3.7
 
 services:
   - redis-server
@@ -10,13 +10,15 @@ services:
 stages:
   - lint
   - test
-  - release
-
-before_install:
-  - pip install poetry
+  - name: release
+    if: tag IS present
 
 install:
+  - pip install poetry
   - poetry install -v
+
+script:
+  - make pytest
 
 jobs:
   include:
@@ -30,6 +32,7 @@ jobs:
       after_success:
         - make codecov
     - stage: release
+      python: 3.7
       script: skip
       before_deploy:
         - poetry config http-basic.pypi $PYPI_USERNAME $PYPI_PASSWORD
@@ -40,5 +43,3 @@ jobs:
         skip_cleanup: true
         on:
           tags: true
-          condition: "$TRAVIS_PYTHON_VERSION == 3.7"
-      if: tag IS present
