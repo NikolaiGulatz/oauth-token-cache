@@ -26,9 +26,9 @@ jobs:
         - poetry run black --check .
     - stage: test
       script:
-        - tox
+        - make tox
       after_success:
-        - poetry run codecov
+        - make codecov
     - stage: release
       script: skip
       before_deploy:
