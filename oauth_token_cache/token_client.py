@@ -32,6 +32,23 @@ class TokenClient:
         self.audience = audience
         self.timeout = kwargs.get("timeout", 5)
 
+    def mocked_token(self, token):
+        """Return a hardcoded token instead of requesting a token or reading
+        it from cache.
+
+        Args:
+            token (str): The token to be returned
+
+        Returns:
+            Token: A Token instance
+        """
+        return Token.from_auth_provider(
+            access_token=token,
+            expires_in=86400,
+            token_type="Bearer",
+            audience=self.audience,
+        )
+
     def fresh_token(self):
         """Obtain a fresh OAuth 2.0 token from the token endpoint.
 

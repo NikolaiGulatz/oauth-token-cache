@@ -79,3 +79,30 @@ OAuthTokenCache(
     redis_client=redis_client,
 )
 ```
+
+## Overwriting the returned token
+
+For CI and testing it is sometimes helpful to overwrite the returned access token and thus bypass the refreshing and caching functionality of OAuthTokenCache.
+
+You can do so by setting the `OAUTH_TOKEN` environment variable. OAuthTokenCache will then always return the access token given in the environment variable.
+
+## Development
+
+1. Install the dependencies:
+
+```shell
+poetry install
+```
+
+2. Run linters:
+
+```shell
+make black
+make pylint
+```
+
+3. Run pytest:
+
+```shell
+make pytest
+```

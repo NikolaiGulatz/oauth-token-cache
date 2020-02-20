@@ -8,6 +8,7 @@ OAuthTokenCache makes it easy to obtain, refresh and cache OAuth 2.0 tokens. Obt
 and in Redis with a TTL which corresponds to the time to expire of your token.
 """
 
+import os
 import requests
 import redis
 
@@ -44,6 +45,9 @@ class OAuthTokenCache:
             * There is no token for the given audience in the cache
             * Refresh is forced
 
+        For usage in CI and testing, if the `OAUTH_TOKEN` environment variable is set,
+        it will skip any checks and return the given token instead.
+
         Args:
             audience (str): The audience for which to issue the token
             refresh (:obj:`bool`, optional): Whether to force refresh the token cache,
@@ -53,7 +57,7 @@ class OAuthTokenCache:
             ValueError: If audience is missing
 
         Returns:
-            Token: An instance of Token
+            Token: A Token instance
         """
         if not audience:
             raise ValueError("audience is required")
@@ -65,6 +69,9 @@ class OAuthTokenCache:
             redis_client=self.redis_client,
             audience=audience,
         )
+
+        if os.getenv("OAUTH_TOKEN"):
+            return token_client.mocked_token(os.getenv("OAUTH_TOKEN"))
 
         if refresh:
             self.tokens[audience] = token_client.fresh_token()
@@ -86,6 +93,8 @@ class OAuthTokenCache:
             redis.Redis: An instance of the redis client
         """
         client = redis.Redis(**{**self.redis_options, **self.REDIS_DEFAULTS})
-        client.ping()
+
+        if not os.getenv("OAUTH_TOKEN"):
+            client.ping()
 
         return client

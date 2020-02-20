@@ -36,6 +36,11 @@ def vcr(vcr):
 
 
 @pytest.fixture
+def oauth_token():
+    return "AYjcyMzY3ZDhiNmJkNTY"
+
+
+@pytest.fixture
 def redis_client():
     return redis.Redis(**OAuthTokenCache.REDIS_DEFAULTS)
 

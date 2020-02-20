@@ -11,6 +11,15 @@ def test_cache_key(make_token_client, redis_client):
     assert token_client.cache_key == "oauth_token_cache__XXX_test"
 
 
+def test_mocked_token(make_token_client, oauth_token):
+    token_client = make_token_client()
+
+    result = token_client.mocked_token(oauth_token)
+
+    assert isinstance(result, Token)
+    assert result.access_token == oauth_token
+
+
 @pytest.mark.vcr(filter_post_data_parameters=["client_id", "client_secret"])
 def test_fresh_token_success(make_token_client, redis_client):
     token_client = make_token_client()
