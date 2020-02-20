@@ -1,13 +1,33 @@
 import os
 import pytest
+
 from unittest import mock
 
 from oauth_token_cache import OAuthTokenCache, TokenClient
 
 
+@pytest.fixture
+def with_mocked_token(oauth_token):
+    os.environ["OAUTH_TOKEN"] = oauth_token
+
+    yield
+
+    del os.environ["OAUTH_TOKEN"]
+
+
+def test_mocked_token(
+    oauth_token_cache_instance, audience, oauth_token, with_mocked_token
+):
+    """Integration test OAuthTokenCache when `OAUTH_TOKEN` environment variable is set"""
+    token = oauth_token_cache_instance.token(audience=audience)
+
+    assert os.environ.get("OAUTH_TOKEN") is not None
+    assert token.access_token == oauth_token
+
+
 @pytest.mark.vcr()
 def test_all(oauth_token_cache_instance, make_token_client, audience):
-    """ Integration test OAuthTokenCache and make sure that the caching mechanism is working."""
+    """Integration test OAuthTokenCache and make sure that the caching mechanism is working."""
     original_fresh_token = TokenClient.fresh_token
 
     token_client = make_token_client()
