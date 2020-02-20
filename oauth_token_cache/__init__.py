@@ -33,7 +33,7 @@ class OAuthTokenCache:
         self.token_url = token_url
         self.timeout = kwargs.get("timeout", 5)
         self.redis_options = kwargs.get("redis_options", {})
-        self.redis_client = kwargs.get("redis_client", self._default_redis_client())
+        self.redis_client = kwargs.get("redis_client") or self._default_redis_client()
         self.tokens = {}
 
     def token(self, audience=None, refresh=False):
