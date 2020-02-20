@@ -19,10 +19,18 @@ def test_mocked_token(
     oauth_token_cache_instance, audience, oauth_token, with_mocked_token
 ):
     """Integration test OAuthTokenCache when `OAUTH_TOKEN` environment variable is set"""
-    token = oauth_token_cache_instance.token(audience=audience)
+    with mock.patch.object(
+        TokenClient, "fresh_token"
+    ) as mock_fresh_token, mock.patch.object(
+        TokenClient, "cached_token"
+    ) as mock_cached_token:
+        token = oauth_token_cache_instance.token(audience=audience)
 
-    assert os.environ.get("OAUTH_TOKEN") is not None
-    assert token.access_token == oauth_token
+        assert os.environ.get("OAUTH_TOKEN") is not None
+        assert token.access_token == oauth_token
+
+        mock_cached_token.assert_not_called()
+        mock_fresh_token.assert_not_called()
 
 
 @pytest.mark.vcr()
