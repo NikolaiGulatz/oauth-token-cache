@@ -102,7 +102,7 @@ class TokenClient:
         """
         pipeline = self.redis_client.pipeline()
 
-        pipeline.hmset(self.cache_key, token.asdict())
+        pipeline.hset(self.cache_key, mapping=token.asdict())
         pipeline.expire(self.cache_key, token.expires_in)
         pipeline.execute()
 
